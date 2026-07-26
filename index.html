@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="bn">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>BDN - Blood Donation Network</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Anek+Bangla:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="./style/style.css"/>
+</head>
+<body class="bg-[#f9f9ff] text-[#141b2b] font-bangla selection:bg-[#ffdad6] selection:text-[#b70011]">
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="flex justify-between items-center px-4 md:px-12 h-20 w-full max-w-7xl mx-auto">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full primary-gradient flex items-center justify-center text-white shadow-md">
+                    <span class="material-symbols-outlined text-2xl">favorite</span>
+                </div>
+                <span class="font-display text-2xl font-extrabold tracking-tight text-[#b70011]">BDN</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-[#b70011] font-bold border-b-2 border-[#b70011] pb-1 transition-all" href="#home">হোম</a>
+                <a class="text-gray-600 hover:text-[#b70011] transition-colors" href="#about">আমাদের সম্পর্কে</a>
+                <a class="text-gray-600 hover:text-[#b70011] transition-colors" href="#how-it-works">কীভাবে কাজ করে</a>
+                <a class="text-gray-600 hover:text-[#b70011] transition-colors" href="#faq">সাধারণ প্রশ্ন</a>
+                <a class="text-gray-600 hover:text-[#b70011] transition-colors" href="#contact">যোগাযোগ</a>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button class="px-5 py-2 rounded-full border-2 border-[#b70011] text-[#b70011] font-bold hover:bg-red-50 transition-all active:scale-95">লগইন</button>
+                <button class="px-5 py-2 rounded-full primary-gradient text-white font-bold shadow-md hover:opacity-95 transition-all active:scale-95">নিবন্ধন করুন</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 overflow-hidden" id="home">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <h1 class="font-display text-4xl md:text-6xl font-extrabold text-[#141b2b] leading-tight mb-6">
+                    স্বেচ্ছায় রক্ত দিন<br/>
+                    <span class="text-[#b70011] italic"> মানবতার</span> <br> বন্ধন গড়ে তুলুন।
+                </h1>
+                <p class="text-lg text-gray-600 mb-8 max-w-lg">
+                    বাংলাদেশের যেকোনো প্রান্তে জরুরি রক্তদাতা ও রক্তপ্রত্যাশীদের দ্রুত সংযুক্ত করার একটি উন্মুক্ত ও মানবিক প্ল্যাটফর্ম।
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button class="px-8 py-3.5 rounded-full primary-gradient text-white font-bold text-lg shadow-xl hover:scale-105 transition-all flex items-center gap-2 active:scale-95">
+                        রক্তদাতা হোন <span class="material-symbols-outlined">favorite</span>
+                    </button>
+                    <button class="px-8 py-3.5 rounded-full bg-white border border-gray-200 text-[#141b2b] font-bold text-lg hover:bg-gray-50 transition-all shadow-sm active:scale-95">
+                        রক্ত খুঁজুন
+                    </button>
+                </div>
+            </div>
+            
+            <div class="relative reveal animate-float">
+                <img alt="Medical Illustration" class="w-full h-auto drop-shadow-2xl rounded-3xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMQc_wh_NQfx7MAoFDwcZwvoXE342zyEJp7LEFY1go36dhxIsJm2Sl1S5xkdtJx4GRB3ZxVM--eG3qSc7waw-96M5YKzaQiFoAOqdTbXW9NPJ3WctOSLrLDqORN5HWIY6EmBj1lAaDTBPEuI0CVZUUuMgvD5_71HolU9vOgO6c379EOhv0G_WWxYyrWsHTc9CQ5g5guf7pOn3zr_WtlAb2btWeNXuqxgflSGzJitDfox8VEXw1vd-ZoyPPvY7yp2taaTYCkZQgKhU"/>
+                <div class="absolute -bottom-6 -left-6 glass-card p-4 rounded-2xl shadow-xl max-w-xs border border-white/40">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full primary-gradient flex items-center justify-center text-white shrink-0">
+                            <span class="material-symbols-outlined">emergency</span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-[#b70011] uppercase tracking-wider">জরুরি সতর্কতা</p>
+                            <p class="text-sm font-bold text-gray-800">ঢাকা মেডিকেল কলেজ হাসপাতালে O- রক্ত প্রয়োজন</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trust Strip -->
+    <section class="bg-indigo-50/50 py-8 border-y border-gray-200/60">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 flex flex-wrap justify-around items-center gap-6 text-gray-700">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#b70011]">code</span>
+                <span class="font-bold text-sm md:text-base">সম্পূর্ণ ওপেন সোর্স</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#b70011]">groups</span>
+                <span class="font-bold text-sm md:text-base">স্বেচ্ছাসেবীদের উদ্যোগ</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#b70011]">volunteer_activism</span>
+                <span class="font-bold text-sm md:text-base">সম্পূর্ণ বিনামূল্যে</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#b70011]">verified_user</span>
+                <span class="font-bold text-sm md:text-base">নিরাপদ তথ্য সংরক্ষণ</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#b70011]">medical_services</span>
+                <span class="font-bold text-sm md:text-base">জরুরি সেবার জন্য প্রস্তুত</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Join / About -->
+    <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto" id="about">
+        <div class="text-center mb-16 reveal">
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-3">কেন আমাদের প্ল্যাটফর্ম ব্যবহার করবেন?</h2>
+            <div class="w-20 h-1 primary-gradient mx-auto rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 reveal">
+                <div class="w-14 h-14 rounded-2xl primary-gradient flex items-center justify-center text-white mb-6">
+                    <span class="material-symbols-outlined text-3xl icon-fill">favorite</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3">জীবন বাঁচান</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">আপনার একবার রক্তদান একজন বা একাধিক মানুষের জীবন রক্ষা করতে পারে।</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 reveal delay-100">
+                <div class="w-14 h-14 rounded-2xl primary-gradient flex items-center justify-center text-white mb-6">
+                    <span class="material-symbols-outlined text-3xl icon-fill">bolt</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3">জরুরি নোটিফিকেশন</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">আপনার রক্তের গ্রুপের প্রয়োজন হলে তাৎক্ষণিক নোটিফিকেশন পাবেন।</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 reveal delay-200">
+                <div class="w-14 h-14 rounded-2xl primary-gradient flex items-center justify-center text-white mb-6">
+                    <span class="material-symbols-outlined text-3xl icon-fill">public</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3">মানবিক নেটওয়ার্ক</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">দেশের হাজারো স্বেচ্ছাসেবী রক্তদাতার সঙ্গে যুক্ত থাকুন।</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 reveal delay-300">
+                <div class="w-14 h-14 rounded-2xl primary-gradient flex items-center justify-center text-white mb-6">
+                    <span class="material-symbols-outlined text-3xl icon-fill">verified_user</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3">নিরাপদ ও নির্ভরযোগ্য</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">যাচাইকৃত তথ্য এবং নিরাপদ ডেটা ব্যবস্থাপনা।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="bg-[#dc2626] text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="reveal">
+                <h4 class="font-display text-5xl font-extrabold mb-2 counter" data-target="24500">0</h4>
+                <p class="text-sm font-bold uppercase tracking-wider text-red-100">নিবন্ধিত রক্তদাতা</p>
+            </div>
+            <div class="reveal delay-100">
+                <h4 class="font-display text-5xl font-extrabold mb-2 counter" data-target="1280">0</h4>
+                <p class="text-sm font-bold uppercase tracking-wider text-red-100">সফল রক্তদান</p>
+            </div>
+            <div class="reveal delay-200">
+                <h4 class="font-display text-5xl font-extrabold mb-2 counter" data-target="85000">0</h4>
+                <p class="text-sm font-bold uppercase tracking-wider text-red-100">উপকৃত রোগী</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto" id="how-it-works">
+        <div class="text-center mb-16 reveal">
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">কীভাবে কাজ করে</h2>
+            <p class="text-gray-600 text-lg">মাত্র ৫টি ধাপে</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+            <div class="text-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 reveal">
+                <div class="w-16 h-16 rounded-full bg-red-50 mx-auto flex items-center justify-center mb-4 border-2 border-red-200 relative">
+                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full primary-gradient text-white flex items-center justify-center font-bold text-xs">১</span>
+                    <span class="material-symbols-outlined text-3xl text-[#b70011]">person_add</span>
+                </div>
+                <h5 class="font-bold text-lg mb-2">নিবন্ধন করুন</h5>
+                <p class="text-xs text-gray-500">সহজেই প্রোফাইল তৈরি করে যুক্ত হোন।</p>
+            </div>
+            <div class="text-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 reveal delay-100">
+                <div class="w-16 h-16 rounded-full bg-red-50 mx-auto flex items-center justify-center mb-4 border-2 border-red-200 relative">
+                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full primary-gradient text-white flex items-center justify-center font-bold text-xs">২</span>
+                    <span class="material-symbols-outlined text-3xl text-[#b70011]">location_on</span>
+                </div>
+                <h5 class="font-bold text-lg mb-2">রক্তের গ্রুপ ও ঠিকানা যুক্ত করুন</h5>
+                <p class="text-xs text-gray-500">আপনার বর্তমান অবস্থান ও রক্তের গ্রুপ নিশ্চিত করুন।</p>
+            </div>
+            <div class="text-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 reveal delay-200">
+                <div class="w-16 h-16 rounded-full bg-red-50 mx-auto flex items-center justify-center mb-4 border-2 border-red-200 relative">
+                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full primary-gradient text-white flex items-center justify-center font-bold text-xs">৩</span>
+                    <span class="material-symbols-outlined text-3xl text-[#b70011]">search</span>
+                </div>
+                <h5 class="font-bold text-lg mb-2">রক্তদাতা খুঁজুন অথবা পোস্ট করুন</h5>
+                <p class="text-xs text-gray-500">জরুরি প্রয়োজনে পোস্ট করুন বা রক্তদাতা খুঁজুন। প্রয়োজনে এডমিনের সাথে যোগাযোগ করুন।</p>
+            </div>
+            <div class="text-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 reveal delay-300">
+                <div class="w-16 h-16 rounded-full bg-red-50 mx-auto flex items-center justify-center mb-4 border-2 border-red-200 relative">
+                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full primary-gradient text-white flex items-center justify-center font-bold text-xs">৪</span>
+                    <span class="material-symbols-outlined text-3xl text-[#b70011]">vaccines</span>
+                </div>
+                <h5 class="font-bold text-lg mb-2">রক্তদান সম্পন্ন করুন</h5>
+                <p class="text-xs text-gray-500">নির্দিষ্ট স্থানে গিয়ে নিরাপদ রক্তদান করুন।</p>
+            </div>
+            <div class="text-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 reveal delay-400">
+                <div class="w-16 h-16 rounded-full bg-red-50 mx-auto flex items-center justify-center mb-4 border-2 border-red-200 relative">
+                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full primary-gradient text-white flex items-center justify-center font-bold text-xs">৫</span>
+                    <span class="material-symbols-outlined text-3xl text-[#b70011]">celebration</span>
+                </div>
+                <h5 class="font-bold text-lg mb-2">একটি জীবন বাঁচাতে ভূমিকা রাখুন</h5>
+                <p class="text-xs text-gray-500">একজন মানুষের মুখে হাসি ফোটান।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blood Groups Section -->
+   
+
+    <!-- Features -->
+    <section class="py-20 max-w-7xl mx-auto px-4 md:px-12">
+        <div class="text-center mb-16 reveal">
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">আমাদের বিশেষ সুবিধাসমূহ</h2>
+            <p class="text-gray-600">আধুনিক প্রযুক্তির সাহায্যে দ্রুত সেবা</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all reveal bg-white">
+                <span class="material-symbols-outlined text-[#b70011] text-3xl mb-3">search_check</span>
+                <h6 class="font-bold text-lg mb-2">দ্রুত অনুসন্ধান</h6>
+                <p class="text-xs text-gray-500 leading-relaxed">নিকটস্থ উপযুক্ত রক্তদাতা খুঁজুন।</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all reveal delay-100 bg-white">
+                <span class="material-symbols-outlined text-[#b70011] text-3xl mb-3">verified</span>
+                <h6 class="font-bold text-lg mb-2">যাচাইকৃত হাসপাতাল</h6>
+                <p class="text-xs text-gray-500 leading-relaxed">শুধুমাত্র নির্ভরযোগ্য হাসপাতাল ও রক্তদান কেন্দ্র।</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all reveal delay-100 bg-white">
+                <span class="material-symbols-outlined text-[#b70011] text-3xl mb-3">location_on</span>
+                <h6 class="font-bold text-lg mb-2">অবস্থানভিত্তিক অনুসন্ধান</h6>
+                <p class="text-xs text-gray-500 leading-relaxed">আপনার আশেপাশের রক্তদাতাদের সহজেই খুঁজুন।</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all reveal delay-200 bg-white">
+                <span class="material-symbols-outlined text-[#b70011] text-3xl mb-3">lock</span>
+                <h6 class="font-bold text-lg mb-2">তথ্যের নিরাপত্তা</h6>
+                <p class="text-xs text-gray-500 leading-relaxed">আপনার ব্যক্তিগত তথ্য নিরাপদ থাকবে।</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all reveal delay-200 bg-white">
+                <span class="material-symbols-outlined text-[#b70011] text-3xl mb-3">notifications_active</span>
+                <h6 class="font-bold text-lg mb-2">জরুরি নোটিফিকেশন</h6>
+                <p class="text-xs text-gray-500 leading-relaxed">রক্তের প্রয়োজন হলে তাৎক্ষণিক বার্তা।</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all reveal delay-300 bg-white">
+                <span class="material-symbols-outlined text-[#b70011] text-3xl mb-3">history</span>
+                <h6 class="font-bold text-lg mb-2">রক্তদানের ইতিহাস</h6>
+                <p class="text-xs text-gray-500 leading-relaxed">আপনার সকল রক্তদানের তথ্য সংরক্ষিত থাকবে।</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all reveal delay-300 bg-white">
+                <span class="material-symbols-outlined text-[#b70011] text-3xl mb-3">handshake</span>
+                <h6 class="font-bold text-lg mb-2">স্বেচ্ছাসেবী নেটওয়ার্ক</h6>
+                <p class="text-xs text-gray-500 leading-relaxed">দেশব্যাপী রক্তদাতাদের সঙ্গে সংযুক্ত থাকুন।</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all reveal delay-400 bg-white">
+                <span class="material-symbols-outlined text-[#b70011] text-3xl mb-3">support_agent</span>
+                <h6 class="font-bold text-lg mb-2">২৪ ঘণ্টা সহায়তা</h6>
+                <p class="text-xs text-gray-500 leading-relaxed">প্রয়োজনে সর্বক্ষণ সহযোগিতা।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-12">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">মানুষের অভিজ্ঞতা</h2>
+                <p class="text-gray-600">আমাদের মাধ্যমে উপকৃত প্রিয়জনদের বক্তব্য</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm reveal border border-gray-100">
+                    <div class="flex gap-1 mb-4 text-orange-500">
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                    </div>
+                    <p class="italic text-gray-600 mb-6 leading-relaxed">"রাতের জরুরি মুহূর্তে মাত্র কয়েক মিনিটের মধ্যে একজন রক্তদাতা পেয়েছিলাম। এই প্ল্যাটফর্ম না থাকলে পরিস্থিতি আরও কঠিন হয়ে যেত।"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYhcmIeck0iR6IR_83iBWA0zg3qNLToh7rgI9wBZ_OP71c3kNxzwxOaT9rUuCXcx4vEgUpPKl2BAbLwz-2wEMnXwdYdXSUQP2qkYaIXvU9zIyNq8PuWCtBu8dQF_tu-CQycA43dt3tqPm0JtUgNwp9amq8aaFC2oMslP71YOd9CzSkjUvo-1C4nZz36GAqUmctGFxAmMPP91OAPdvSbAZlcd-YbD7-njDUDSB07tDdmFjl8vvER5BNw-NJDgQ90K9dg2VNzYnM7lI" alt="David Chen"/>
+                        </div>
+                        <div>
+                            <p class="font-bold">আরিফ রহমান</p>
+                            <p class="text-xs text-gray-500">একজন রোগীর স্বজন</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm reveal delay-100 border border-gray-100">
+                    <div class="flex gap-1 mb-4 text-orange-500">
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                    </div>
+                    <p class="italic text-gray-600 mb-6 leading-relaxed">"এখানে রক্তদান করা খুব সহজ। যখনই প্রয়োজন হয়, দ্রুত খবর পাই এবং মানুষের পাশে দাঁড়াতে পারি।"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlTx4i1SYk6CZGvysro1g8sllbwJWQ1xT8hCx6DAX3PZ2CYBbRDc-MRYe-dY3ZttsHdqzgIpT-rk2uI4V_JcRy72D5s0dyj7LZ0PJ2eTiQNle3jf6Zfgr3VWhFRjaKiE2uyR7QSpCXSJRopHhV5L8CMzx5VzgGCFCLAXqcdE51HtHG-HZuBw8jOBJ4yirRAQtbrVKJ-ilRAqhYiTbgLSgdsMEgVLD-kCQaWWvlLlQrjVOhzjLKr4o0NEmmylWK2PubB05U0tJ2CRQ" alt="Sarah Jenkins"/>
+                        </div>
+                        <div>
+                            <p class="font-bold">সাদিয়া সুলতানা</p>
+                            <p class="text-xs text-gray-500">একজন নিয়মিত রক্তদাতা</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm reveal delay-200 border border-gray-100">
+                    <div class="flex gap-1 mb-4 text-orange-500">
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                        <span class="material-symbols-outlined icon-fill">star</span>
+                    </div>
+                    <p class="italic text-gray-600 mb-6 leading-relaxed">"জরুরি রক্ত সংগ্রহের জন্য এটি অত্যন্ত কার্যকর একটি প্ল্যাটফর্ম।"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzyg2uxsuseKLOzDqn1pzLcGGJIsEp6r5Q6XOPWKP_vs6ld3WI7UJumkgUVJBmn0-V6Hsl6Pk31PGbc2wx7qBuYLXlzI1hJItdi2YddPwVbm_-6gFjSSya70GVrJTLbCRaKakdRi6N8jMDXby0iU5pgRyROrXzB5nvVuXixt-R5uyZ1ULIZj8Fklg92U2NIChmjP547Z-QjswJY-cYjjBTagXQ85aFqxEirbVy57xBHcWT8ZCHM4PC0nCkXmifTbTi_n2anLIiYGU" alt="Dr. Elena Rodriguez"/>
+                        </div>
+                        <div>
+                            <p class="font-bold">ডা. মাহমুদ হাসান</p>
+                            <p class="text-xs text-gray-500">হাসপাতালের প্রতিনিধি</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-4 md:px-12 max-w-3xl mx-auto" id="faq">
+        <div class="text-center mb-16 reveal">
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">সাধারণ জিজ্ঞাসা</h2>
+            <p class="text-gray-600">সচরাচর জিজ্ঞাসিত প্রশ্নাবলী</p>
+        </div>
+        <div class="space-y-4 reveal">
+            <details class="group bg-white rounded-2xl border border-gray-200/80 overflow-hidden" open>
+                <summary class="flex justify-between items-center p-6 cursor-pointer font-bold text-gray-800 hover:bg-gray-50 transition-all">
+                    আমার তথ্য কি নিরাপদ থাকবে?
+                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
+                    হ্যাঁ। আপনার ব্যক্তিগত তথ্য নিরাপদভাবে সংরক্ষণ করা হবে এবং অনুমতি ছাড়া কারও সঙ্গে শেয়ার করা হবে না।
+                </div>
+            </details>
+            <details class="group bg-white rounded-2xl border border-gray-200/80 overflow-hidden">
+                <summary class="flex justify-between items-center p-6 cursor-pointer font-bold text-gray-800 hover:bg-gray-50 transition-all">
+                    কতদিন পর আবার রক্ত দিতে পারি?
+                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
+                    সাধারণত একজন সুস্থ ব্যক্তি ১২০ দিন পর পুনরায় রক্ত দিতে পারেন।
+                </div>
+            </details>
+            <details class="group bg-white rounded-2xl border border-gray-200/80 overflow-hidden">
+                <summary class="flex justify-between items-center p-6 cursor-pointer font-bold text-gray-800 hover:bg-gray-50 transition-all">
+                    রক্তদানের আগে কী করবো?
+                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>পর্যাপ্ত পানি পান করুন</li>
+                        <li>হালকা খাবার খান</li>
+                        <li>পর্যাপ্ত ঘুম নিশ্চিত করুন</li>
+                        <li>জাতীয় পরিচয়পত্র সঙ্গে রাখুন</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-16 px-4 md:px-12 max-w-7xl mx-auto reveal">
+        <div class="primary-gradient rounded-3xl p-10 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">
+            <h2 class="font-display text-3xl md:text-5xl font-extrabold mb-6 relative z-10">আজই একজন স্বেচ্ছাসেবী রক্তদাতা হিসেবে যুক্ত হোন</h2>
+            <p class="text-lg mb-8 opacity-90 relative z-10 max-w-2xl mx-auto">
+                আপনার কয়েক মিনিটের সময় একজন মানুষের পুরো জীবন বদলে দিতে পারে।
+            </p>
+            <button class="bg-white text-[#b70011] font-bold px-8 py-4 rounded-full text-lg shadow-xl hover:scale-105 transition-all relative z-10 active:scale-95">
+                এখনই নিবন্ধন করুন
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:px-12 py-12 max-w-7xl mx-auto">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="font-display text-2xl font-bold text-[#b70011]">BDN</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                    আমাদের সম্পর্কে: বাংলাদেশের স্বেচ্ছাসেবী রক্তদাতা ও রক্তপ্রত্যাশীদের সংযুক্ত করার একটি উন্মুক্ত মানবিক উদ্যোগ।
+                </p>
+            </div>
+            <div>
+                <h6 class="font-bold text-gray-800 mb-4">দ্রুত লিংক</h6>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a class="hover:text-[#b70011] transition-colors" href="#">রক্তের অনুরোধ</a></li>
+                    <li><a class="hover:text-[#b70011] transition-colors" href="#">রক্তদাতা খুঁজুন</a></li>
+                    <li><a class="hover:text-[#b70011] transition-colors" href="#">ওপেন সোর্স</a></li>
+                    <li><a class="hover:text-[#b70011] transition-colors" href="#">গোপনীয়তা নীতি</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-bold text-gray-800 mb-4">কমিউনিটি</h6>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a class="hover:text-[#b70011] transition-colors" href="#">স্বেচ্ছাসেবক হোন</a></li>
+                    <li><a class="hover:text-[#b70011] transition-colors" href="#">সফলতার গল্প</a></li>
+                    <li><a class="hover:text-[#b70011] transition-colors" href="#">রক্তদান নির্দেশিকা</a></li>
+                    <li><a class="hover:text-[#b70011] transition-colors" href="#">যাচাইকৃত হাসপাতালসমূহ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-bold text-gray-800 mb-4">আপডেট পেতে</h6>
+                <p class="text-xs text-gray-500 mb-4">আপনার এলাকায় রক্তের জরুরি প্রয়োজনের খবর পেতে ইমেইল যুক্ত করুন।</p>
+                <div class="flex">
+                    <input class="bg-gray-100 border-none rounded-l-xl px-4 py-2.5 w-full text-sm focus:ring-1 focus:ring-[#b70011] outline-none" placeholder="আপনার ইমেইল লিখুন" type="email"/>
+                    <button class="primary-gradient text-white px-4 py-2.5 rounded-r-xl"><span class="material-symbols-outlined text-sm">send</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-100 py-6 text-center text-xs text-gray-500">
+            © ২০২৬ Blood Donation Network। মানুষের জীবনের পাশে থাকার অঙ্গীকার। ভালোবাসা ও মানবতার জন্য নির্মিত।
+        </div>
+    </footer>
+
+    <!-- Inline Script for Interactive Features -->
+    <script>
+        // Reveal Animations
+        const observerOptions = { threshold: 0.1 };
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Animated Counters
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            entry.target.innerText = Math.floor(current).toLocaleString('bn-BD');
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            entry.target.innerText = target.toLocaleString('bn-BD') + '+';
+                        }
+                    };
+                    updateCounter();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+    </script>
+</body>
+</html>
+index.html
+Displaying index.html.

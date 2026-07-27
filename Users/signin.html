@@ -4,18 +4,12 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>সাইন ইন - BDN</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Anek+Bangla:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <!-- Material Symbols Outlined -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <!-- External CSS (Navigating up one level to style/style.css) -->
     <link rel="stylesheet" href="../style/style.css"/>
 </head>
 <body class="bg-[#f9f9ff] text-[#141b2b] font-bangla min-h-screen flex flex-col justify-between selection:bg-[#ffdad6] selection:text-[#b70011]">
-
-    <!-- Navigation Header -->
     <nav class="w-full bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div class="flex justify-between items-center px-4 md:px-12 h-20 w-full max-w-7xl mx-auto">
             <a href="../index.html" class="flex items-center gap-3">
@@ -31,7 +25,6 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-1 flex items-center justify-center p-4 py-12">
         <div class="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100 p-8 reveal active">
             <div class="text-center mb-8">
@@ -42,17 +35,16 @@
                 <p class="text-xs text-gray-500 mt-1">আপনার সঠিক তথ্য দিয়ে একাউন্টে প্রবেশ করুন</p>
             </div>
 
-            <form action="#" method="POST" class="space-y-5">
-                <!-- Phone Number -->
+            <!-- ID added to form -->
+            <form id="signinForm" class="space-y-5">
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-2">ফোন নম্বর *</label>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-3.5 top-3 text-gray-400 text-xl">call</span>
-                        <input type="tel" required placeholder="017XXXXXXXX" class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm focus:outline-none focus:border-[#b70011] focus:bg-white transition-all"/>
+                        <input type="tel" id="loginPhone" required placeholder="017XXXXXXXX" class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm focus:outline-none focus:border-[#b70011] focus:bg-white transition-all"/>
                     </div>
                 </div>
 
-                <!-- Password -->
                 <div>
                     <div class="flex justify-between items-center mb-2">
                         <label class="block text-xs font-bold text-gray-700">পাসওয়ার্ড *</label>
@@ -60,36 +52,42 @@
                     </div>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-3.5 top-3 text-gray-400 text-xl">lock</span>
-                        <input type="password" required placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm focus:outline-none focus:border-[#b70011] focus:bg-white transition-all"/>
+                        <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm focus:outline-none focus:border-[#b70011] focus:bg-white transition-all"/>
                     </div>
                 </div>
 
-                <!-- Remember Me -->
-                <div class="flex items-center gap-2 pt-1">
-                    <input type="checkbox" id="remember" class="w-4 h-4 rounded text-[#b70011] focus:ring-[#b70011] border-gray-300 cursor-pointer"/>
-                    <label for="remember" class="text-xs text-gray-600 cursor-pointer">আমাকে সাইন ইন করে রাখুন</label>
-                </div>
-
-                <!-- Submit Button -->
                 <button type="submit" class="w-full primary-gradient text-white font-bold py-3.5 rounded-xl shadow-lg hover:opacity-95 transition-all active:scale-95 flex items-center justify-center gap-2">
                     সাইন ইন করুন <span class="material-symbols-outlined text-xl">arrow_forward</span>
                 </button>
             </form>
-
-            <div class="mt-8 pt-6 border-t border-gray-100 text-center">
-                <p class="text-xs text-gray-500">
-                    সাইন ইন করার মাধ্যমে আপনি আমাদের 
-                    <a href="#" class="text-[#b70011] font-medium hover:underline">শর্তাবলী</a> ও 
-                    <a href="#" class="text-[#b70011] font-medium hover:underline">গোপনীয়তা নীতি</a> মেনে নিচ্ছেন।
-                </p>
-            </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-gray-100 bg-white py-4 text-center text-xs text-gray-500">
         © ২০২৬ Blood Donation Network। সর্বস্বত্ব সংরক্ষিত।
     </footer>
 
+    <!-- NEW JAVASCRIPT LOGIC -->
+    <script>
+    document.getElementById('signinForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const phone = document.getElementById('loginPhone').value.trim();
+        const password = document.getElementById('loginPassword').value;
+
+        const formData = new FormData();
+        formData.append('action', 'login');
+        formData.append('phone', phone);
+        formData.append('password', password);
+
+        fetch('../backend/Dashboard/connector.php', { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            if (data.status === 'success') {
+                window.location.href = '../backend/Dashboard/dashboard.html';
+            }
+        }).catch(err => alert('সার্ভার কানেকশন ত্রুটি!'));
+    });
+    </script>
 </body>
 </html>

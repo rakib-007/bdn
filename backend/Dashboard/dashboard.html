@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ড্যাশবোর্ড - BDN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans p-6">
+    <div class="max-w-5xl mx-auto space-y-8">
+        
+        <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <h1 class="font-bold text-xl text-red-700">BDN ড্যাশবোর্ড</h1>
+            <div class="flex items-center gap-4">
+                <span id="userNameDisplay" class="text-sm font-bold text-gray-600"></span>
+                <button onclick="logout()" class="px-4 py-1.5 bg-gray-200 text-sm rounded hover:bg-red-600 hover:text-white transition">লগআউট</button>
+            </div>
+        </div>
+
+        <!-- NEW: Blood Request Form -->
+        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+            <h2 class="font-bold text-lg mb-4 text-red-700">জরুরী রক্তের আবেদন</h2>
+            <form id="requestForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <input type="text" id="req_patient_name" placeholder="রোগীর নাম" required class="p-2 border rounded-lg text-sm bg-gray-50"/>
+                <input type="number" id="req_patient_age" placeholder="রোগীর বয়স" required class="p-2 border rounded-lg text-sm bg-gray-50"/>
+                <input type="tel" id="req_patient_phone" placeholder="যোগাযোগের নম্বর" required class="p-2 border rounded-lg text-sm bg-gray-50"/>
+                
+                <select id="req_blood_group" required class="p-2 border rounded-lg text-sm bg-gray-50">
+                    <option value="">রক্তের গ্রুপ নির্বাচন করুন</option>
+                </select>
+                
+                <input type="number" id="req_bags" placeholder="কত ব্যাগ প্রয়োজন?" required class="p-2 border rounded-lg text-sm bg-gray-50"/>
+                <input type="date" id="req_date" required class="p-2 border rounded-lg text-sm bg-gray-50"/>
+                
+                <textarea id="req_reason" placeholder="রোগের কারণ / বিস্তারিত..." class="p-2 border rounded-lg text-sm bg-gray-50 sm:col-span-2 lg:col-span-3"></textarea>
+                
+                <button type="submit" class="sm:col-span-2 lg:col-span-3 px-5 py-2.5 bg-red-700 text-white rounded-lg text-sm font-bold hover:bg-red-800 transition-colors">
+                    আবেদন সাবমিট করুন
+                </button>
+            </form>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+            <h2 class="font-bold text-lg mb-4">রক্তদাতা খুঁজুন</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                <select id="filter_blood_group" class="p-2 border rounded-lg text-sm bg-white"><option value="">রক্তের গ্রুপ</option></select>
+                <select id="filter_division" onchange="loadDistricts(this.value)" class="p-2 border rounded-lg text-sm bg-white"><option value="">বিভাগ</option></select>
+                <select id="filter_district" onchange="loadUpazilas(this.value)" class="p-2 border rounded-lg text-sm bg-white"><option value="">জেলা</option></select>
+                <select id="filter_upazila" class="p-2 border rounded-lg text-sm bg-white"><option value="">উপজেলা</option></select>
+            </div>
+            <button onclick="searchDonors()" class="mt-4 px-5 py-2 bg-gray-800 text-white rounded-lg text-sm font-bold hover:bg-black transition-colors">অনুসন্ধান</button>
+        </div>
+
+        <div>
+            <h3 class="font-bold text-gray-700 text-sm mb-3">রক্তদাতার তালিকা</h3>
+            <div id="donor_list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('connector.php?action=check_auth')
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.authenticated) {
+                        window.location.href = '../../Users/signin.html';
+                    } else {
+                        document.getElementById('userNameDisplay').textContent = "স্বাগতম, " + data.user_name;
+                        initializeDashboard();
+                    }
+                }).catch(() => window.location.href = '../../Users/signin.html');
+        });
+
+        function logout() {
+            fetch('connector.php?action=logout')
+                .then(() => window.location.href = '../../Users/signin.html');
+        }
+
+        function initializeDashboard() {
+            fetch('connector.php?action=get_divisions').then(res => res.json()).then(data => populateDropdown('filter_division', data, 'division_id', 'name'));
+            
+            fetch('connector.php?action=get_blood_groups').then(res => res.json()).then(data => {
+                populateDropdown('filter_blood_group', data, 'blood_group_id', 'group_name');
+                populateDropdown('req_blood_group', data, 'blood_group_id', 'group_name');
+            });
+            searchDonors();
+        }
+
+        function populateDropdown(el, items, idKey, nameKey) {
+            const sel = document.getElementById(el);
+            items.forEach(i => sel.innerHTML += `<option value="${i[idKey]}">${i[nameKey]}</option>`);
+        }
+
+        function loadDistricts(divId) {
+            document.getElementById('filter_district').innerHTML = '<option value="">জেলা</option>';
+            if(divId) fetch(`connector.php?action=get_districts&division_id=${divId}`).then(r=>r.json()).then(d=>populateDropdown('filter_district', d, 'district_id', 'name'));
+        }
+        function loadUpazilas(distId) {
+            document.getElementById('filter_upazila').innerHTML = '<option value="">উপজেলা</option>';
+            if(distId) fetch(`connector.php?action=get_upazilas&district_id=${distId}`).then(r=>r.json()).then(d=>populateDropdown('filter_upazila', d, 'upazila_id', 'name'));
+        }
+
+       function searchDonors() {
+            const bg = document.getElementById('filter_blood_group').value;
+            const div = document.getElementById('filter_division').value;
+            const dist = document.getElementById('filter_district').value;
+            const upa = document.getElementById('filter_upazila').value;
+
+            fetch(`connector.php?action=search_donors&blood_group_id=${bg}&division_id=${div}&district_id=${dist}&upazila_id=${upa}`)
+                .then(res => res.json())
+                .then(donors => {
+                    const list = document.getElementById('donor_list');
+                    if (!donors || donors.length === 0) return list.innerHTML = '<div class="col-span-2 text-center text-gray-400">কোন রক্তদাতা পাওয়া যায়নি।</div>';
+                    
+                    list.innerHTML = '';
+                    donors.forEach(d => {
+                        // Added the last_donation_date logic back in here
+                        const lastDonation = d.last_donation_date ? d.last_donation_date : 'পূর্বে করেননি';
+                        
+                        list.innerHTML += `<div class="bg-white p-4 rounded-xl border flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold">${d.donor_name} <span class="text-red-700">(${d.blood_group})</span></h4>
+                                <p class="text-xs text-gray-500 mt-1">📍 ${d.upazila_name}, ${d.district_name}</p>
+                                <p class="text-[11px] text-gray-400 mt-0.5">সর্বশেষ রক্তদান: ${lastDonation}</p>
+                            </div>
+                            <a href="tel:${d.donor_phone}" class="px-3 py-2 bg-green-50 text-green-700 font-bold text-xs rounded-lg hover:bg-green-100">📞 Call</a>
+                        </div>`;
+                    });
+                });
+        }
+
+        // Handle Blood Request Form Submission
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('action', 'create_request');
+            formData.append('patient_name', document.getElementById('req_patient_name').value);
+            formData.append('patient_age', document.getElementById('req_patient_age').value);
+            formData.append('patient_phone', document.getElementById('req_patient_phone').value);
+            formData.append('blood_group_id', document.getElementById('req_blood_group').value);
+            formData.append('bags_needed', document.getElementById('req_bags').value);
+            formData.append('request_date', document.getElementById('req_date').value);
+            formData.append('reason', document.getElementById('req_reason').value);
+
+            fetch('connector.php', { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if(data.status === 'success') {
+                    document.getElementById('requestForm').reset();
+                }
+            }).catch(err => alert('সার্ভার কানেকশন ত্রুটি!'));
+        });
+    </script>
+</body>
+</html>

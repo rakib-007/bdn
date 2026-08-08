@@ -31,6 +31,8 @@ if ($action === 'register') {
     $upazila_name = trim($_POST['upazila'] ?? '');
     $availability = $_POST['availability'] ?? 'Available';
     $last_date    = !empty($_POST['last_donation_date']) ? $_POST['last_donation_date'] : null;
+    
+    // New Fields
     $dob          = !empty($_POST['dob']) ? $_POST['dob'] : null;
     $gender       = $_POST['gender'] ?? 'Male';
     $address      = trim($_POST['address'] ?? '');
@@ -112,29 +114,59 @@ if ($action === 'logout') {
 }
 
 // --- Create Blood Request ---
+// --- Create Blood Request ---
 if ($action === 'create_request') {
     $patient_name   = trim($_POST['patient_name'] ?? '');
     $patient_age    = intval($_POST['patient_age'] ?? 0);
     $patient_gender = $_POST['patient_gender'] ?? 'Male';
     $patient_phone  = trim($_POST['patient_phone'] ?? '');
     $blood_group_id = intval($_POST['blood_group_id'] ?? 0);
-    $hospital_id    = intval($_POST['hospital_id'] ?? 1); 
+    $hospital_id    = intval($_POST['hospital_id'] ?? 0); 
+    $custom_hospital = trim($_POST['custom_hospital'] ?? '');
+    $hospital_address = trim($_POST['hospital_address'] ?? '');
     $bags_needed    = intval($_POST['bags_needed'] ?? 1);
     $request_date   = $_POST['request_date'] ?? date('Y-m-d');
-    $reason         = trim($_POST['reason'] ?? '');
+    $raw_reason     = trim($_POST['reason'] ?? '');
     $user_id        = $_SESSION['user_id'] ?? 1;
+
+    // Handle Custom Hospital or Fallback
+    if ($hospital_id === 0 && !empty($custom_hospital)) {
+        $hospital_id = 1; // Default fallback hospital ID in DB
+        $hospital_info = "হাসপাতাল: " . $custom_hospital;
+    } else {
+        $stmtH = $pdo->prepare("SELECT name FROM hospital WHERE hospital_id = ?");
+        $stmtH->execute([$hospital_id]);
+        $hName = $stmtH->fetchColumn();
+        $hospital_info = "হাসপাতাল: " . ($hName ?: 'N/A');
+    }
+
+    $full_reason = $hospital_info . " | ঠিকানা: " . $hospital_address . " | বিবরণ: " . $raw_reason;
+
+    if (empty($patient_name) || empty($patient_phone) || empty($blood_group_id) || empty($hospital_address)) {
+        echo json_encode(['status' => 'error', 'message' => 'প্রয়োজনীয় তথ্য (রোগীর নাম, ফোন, রক্তের গ্রুপ ও ঠিকানা) প্রদান করুন।']);
+        exit;
+    }
 
     $sql = "INSERT INTO blood_request (user_id, hospital_id, blood_group_id, patient_name, patient_age, patient_gender, bags_needed, reason, request_date, patient_phone, status)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')";
 
     $stmt = $pdo->prepare($sql);
-    $success = $stmt->execute([$user_id, $hospital_id, $blood_group_id, $patient_name, $patient_age, $patient_gender, $bags_needed, $reason, $request_date, $patient_phone]);
+    $success = $stmt->execute([$user_id, $hospital_id, $blood_group_id, $patient_name, $patient_age, $patient_gender, $bags_needed, $reason_date = $request_date ? $full_reason : $full_reason, $request_date, $patient_phone]);
 
     if ($success) {
         echo json_encode(['status' => 'success', 'message' => 'রক্তের আবেদন সফলভাবে সম্পন্ন হয়েছে']);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'আবেদন করতে ব্যর্থ হয়েছে']);
     }
+    exit;
+}
+
+// --- Fetch Hospitals by Upazila ---
+if ($action === 'get_hospitals_by_upazila') {
+    $upazila_id = intval($_GET['upazila_id'] ?? 0);
+    $stmt = $pdo->prepare("SELECT hospital_id, name FROM hospital WHERE upazila_id = ? ORDER BY name ASC");
+    $stmt->execute([$upazila_id]);
+    echo json_encode($stmt->fetchAll());
     exit;
 }
 

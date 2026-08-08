@@ -441,7 +441,7 @@ Recommended browsers:
 
 ---
 
-# How to Run on Another PC
+# How to Run on Your PC
 
 This project is designed to be easy to set up on another computer.
 
